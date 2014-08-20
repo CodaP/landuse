@@ -1,0 +1,353 @@
+/*
+	general
+*/
+h2 {
+	margin-top: 0;
+}
+.centralColumn {
+	width:850px;
+	margin:auto;
+}
+a {
+	color: #377bbb;
+}
+
+#content_inner {
+	padding: 0 15px 15px 15px;
+}
+.pageTitle {
+	color:#404040;
+	font-size:24px;
+}
+.nice_list li {
+	margin-bottom: 1em;
+}
+html, body, .wrapper {
+	height: 100%;
+}
+body > .wrapper {
+	height: auto;
+	min-height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.main {
+	padding-bottom: 200px; /* must be same height as the footer */
+}
+.footer {
+	position: relative;
+	margin-top: -200px; /* negative value of footer height */
+	height: 200px;
+	clear:both;
+}
+/* CLEAR FIX*/
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both !important;
+	visibility: hidden;
+}
+.clearfix {
+	display: inline-block;
+}
+/* Hides from IE-mac */
+* html .clearfix {
+	height: 1%;
+}
+.clearfix {
+	display: block;
+}
+/* End hide from IE-mac */
+
+
+/*
+	header
+*/
+.header {
+	background-color:#173D85;
+	text-align:center;
+}
+.banner img {
+	vertical-align:middle;
+}
+.banner {
+	background-color:white;
+	border-bottom:12px solid #173D85;
+	border-top:12px solid #173D85;
+}
+.header .top {
+	height:18px;
+	background-color:#377BBB;
+	width:100%;
+}
+.crumbs {
+	background-color:#BD5B2A;
+	height:18px;
+	font-size:15px;
+	border-top: solid 4px #BD5B2A;
+	border-bottom: solid 4px #BD5B2A;
+}
+.crumbs div {
+	text-align:left;
+	vertical-align:top;
+}
+.crumbs ul#top_nav {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+ul#top_nav li {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	margin-right: 2em;
+	font-weight: bold;
+}
+ul#top_nav li a {
+	text-decoration: none;
+	color: white;
+}
+
+/*
+	footer
+*/
+.footer {
+	background-color:#404040;
+	text-align:center;
+}
+.footer img {
+	vertical-align:middle;
+}
+.footer #firstimg {
+	position:relative;
+	right:80px;
+}
+.footer .lastimg {
+	position:relative;
+	left:80px;
+}
+.footer .container {
+	border-top:10px solid #404040;
+	border-bottom:10px solid #404040;
+}
+/*
+	browseForm.php
+*/
+.box {
+	background-color:#404040;
+	text-align:left;
+	margin-top:20px;
+	padding-bottom:2px;
+}
+.box h2, .box h3 {
+	color:white;
+	padding:2px 0 2px 10px;
+	margin: 0;
+	font-size:18px;
+	text-align:left;
+}
+.box h3 {
+	font-size:16px;
+}
+.box div {
+	color: black;
+	background-color:#F7F1E4;
+	margin: 0 2px;
+	padding:0 4px 2px;
+}
+.box form {
+	margin:auto;
+}
+.option {
+	display:inline;
+}
+.option:hover input, .option:hover label, .option:hover {
+	cursor:pointer;
+	color:#377BBB !important;
+}
+.box label {
+	text-decoration:underline;
+	color:#173D85;
+}
+/*
+	BUTTONS
+*/
+	.inputbutton {
+	height:25px;
+	line-height:25px;
+	background-color:#377BBB;
+	color:white;
+	border:none;
+	font-size:14px;
+	font-weight:bold;
+	padding-bottom:3px;
+}
+.inputbutton:hover {
+	background-color:#404040;
+	cursor:pointer;
+}
+.inputbutton.disabled {
+	background-color:#A8A8A8;
+	color:#F5F5F5;
+	cursor:default;
+}
+/*
+	ERRORS
+*/
+
+	.error {
+	border: solid #404040 10px;
+	background-color:lightgrey;
+}
+.errorMsg {
+	color:#BD5B2A;
+	font-weight:bold;
+	font-size:18px;
+	line-height:35px;
+	height:35px;
+}
+/*
+	JQUERY EVENTS
+*/
+	.red {
+	background-color:red;
+}
+.selected {
+	cursor:pointer;
+	color:#377BBB !important;
+}
+/*
+	BETA STYLES
+*/
+
+.betaNote {
+	color: #444;
+	background-color: #ccc;
+	font-weight:bold;
+	font-size:14px;
+	text-align: center;
+}
+.betaNote.constant {
+	font-size:18px;
+	height: auto;
+	line-height:25px;
+}
+.betaNote.one {
+	height:18px;
+}
+.betaNote.two {
+	height:32px;
+}
+.betaNote.three {
+	height:46px;
+}
+
+/*
+OVERRIDE SSEC TEMPLATE STYLE (http://www.ssec.wisc.edu/css/all_pages.php)
+*/
+
+body {
+	background-repeat: no-repeat !important;
+	background-attachment: fixed !important;
+}
+
+#banner {
+	background: #9bb6e4; /* Old browsers */
+	background: -moz-linear-gradient(top,  #9bb6e4 0%, #9bb6e4 0%, #e1e8f5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9bb6e4), color-stop(0%,#9bb6e4), color-stop(100%,#e1e8f5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #9bb6e4 0%,#9bb6e4 0%,#e1e8f5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #9bb6e4 0%,#9bb6e4 0%,#e1e8f5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #9bb6e4 0%,#9bb6e4 0%,#e1e8f5 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #9bb6e4 0%,#9bb6e4 0%,#e1e8f5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9bb6e4', endColorstr='#e1e8f5',GradientType=0 ); /* IE6-9 */
+	
+	background: #000 !important;
+	background-image: none !important;
+	filter: none !important;
+
+	background-repeat: no-repeat;
+	height: auto !important;
+}
+
+#title {
+	top: auto;
+	left: auto;
+	position: relative !important;
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+}
+
+#title h1 {
+	width: 500px;
+	height: 104px;
+	margin: 0;
+	font-size:25px;
+	background-image:url('/landuse/img/title.png');
+	color: black;
+}
+
+#title h1 a {
+	font-size: 25px;
+}
+
+#title .logos {
+	position: absolute;
+	right: 0px;
+	bottom: 10px;
+}
+#title .logos img {
+	height: 60px;
+	margin-left: 20px;
+	border: none;
+}
+#title #cimss_logo {
+	height: 65px;
+	position: relative;
+	bottom: -3px;
+}
+#title .logos a {
+	text-decoration: none;
+}
+
+/* Two column layout */
+.leftColumn {
+	float:left;
+	display:inline-block;
+	width:540px;
+}
+.rightColumn {
+	float:right;
+	vertical-align:top;
+	width:300px;
+	display:inline-block;
+}
+.rightColumn img {
+	float:right;
+	margin-top:20px;
+	border: solid #404040 2px;
+}
+.rightColumn .lastimg {
+	margin-bottom:20px;
+}
+.right_box {
+	float: right;
+	background-color: rgb(255, 247, 236);
+	width: 200px;
+	border: solid 1px #ccc;
+	padding: 10px;
+}
+.right_box h2 {
+	margin: 0;
+	padding: 0;
+	font-size: 16px !important;
+	margin-bottom: 10px;
+}
+.right_box a {
+	text-decoration: none;
+}
+.right_box ul, .right_box ul li {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}

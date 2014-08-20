@@ -1,0 +1,21 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+	<servlet>
+	    <servlet-name>LanduseServlet</servlet-name>
+	    <servlet-class>servlets.Landuse</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>Landuse</display-name>
+		<servlet-name>Landuse</servlet-name>
+		<servlet-class>servlets.Landuse</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>LanduseServlet</servlet-name>
+	    <url-pattern>/index</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Landuse</servlet-name>
+		<url-pattern>/Landuse</url-pattern>
+	</servlet-mapping>
+</web-app>

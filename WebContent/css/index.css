@@ -1,0 +1,76 @@
+#content_container {
+	position: relative;
+	margin: auto;
+	margin-bottom: 0;
+	width: 1000px;
+	padding: 0px;
+}
+
+.left_container {
+	width: 370px;
+	padding: 20px;
+	float: left;
+	margin-top: 0;
+}
+
+.right_container {
+	width: 400px;
+	padding: 20px;
+	float: left;
+	margin-top: 0;
+}
+
+.checkbox {
+	width: 150px;
+	padding: 5px 20px 5px 0px;
+	float: left;
+}
+
+.one_line_checkbox {
+	width: 430px;
+}
+
+.button {
+	background: url("../img/buttons/blue_button.png");
+	text-shadow: 0;
+	border: 0;
+	height: 40px;
+	color: white;
+	width: 250px;
+	margin-left: 50px;
+	margin-top: 20px;
+	border-radius: 2px;
+}
+
+.input_text {
+	border-radius: 2px;
+	padding: 2px;
+	border: 1px solid silver;
+	text-shadow: 0;
+	width: 205px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	
+}
+
+h2 {
+	width: 100%;
+	margin-bottom: 20px;
+	border-bottom: 1px solid black;
+}
+
+#result_table td{
+	padding: 10px;
+	width: 1000px;
+	margin: 20px;
+}
+
+#result_table td.even {
+	background: #dddddd;
+	
+}
+#no_results {
+	margin: 0 auto;
+	font-size: 20px;
+	text-align: center;
+}
