@@ -36,7 +36,7 @@ package query;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
+ */
 
 /*
  * Modified extensively by Alec Anderson for use
@@ -56,158 +56,147 @@ import org.semanticweb.owlapi.util.ShortFormProvider;
 
 class DLQueryPrinter {
 
-    private final DLQueryEngine dlQueryEngine;
-    private final ShortFormProvider shortFormProvider;
+	private final DLQueryEngine dlQueryEngine;
+	private final ShortFormProvider shortFormProvider;
 
-    private static final String EXTRA = "<http://www.semanticweb.org/ontologies/2011/9/ResidentialLandCodes.owl#";
-    
-    /**
-     * @param engine
-     *        the engine
-     * @param shortFormProvider
-     *        the short form provider
-     */
-    public DLQueryPrinter(DLQueryEngine engine,
-            ShortFormProvider shortFormProvider) {
-        this.shortFormProvider = shortFormProvider;
-        dlQueryEngine = engine;
-    }
+	private static final String EXTRA = "<http://www.semanticweb.org/ontologies/2011/9/ResidentialLandCodes.owl#";
 
-    /**
-     * @param classExpression
-     *        the class expression to use for interrogation
-     * @return
-     * 		returns the query result, "" if no result for given area
-     */
-    public ArrayList<String> askQuery(String classExpression, OWLOntology ontology, String area) {
-    	ArrayList<String> results = new ArrayList<String>();
-        if (classExpression.length() == 0) {
-        	return results;
-        } else {
-            try {
-                OWLClass cls = dlQueryEngine.getClass(getClassExpression(classExpression));
-                if(cls != null) {
-                	//remove the extra bits from the class name
-                	String clsName = getClassName(cls);
-                	
-                	for(int j=0; j < cls.getAnnotations(ontology).size(); j++) {
-                		
-                		String lines [] = getComments(cls, ontology);
-               			boolean found = false;
-                       	for(String line : lines) {
-                       		//check comments for area and see if it's there
-                       		if(line.contains(area)) {
-                       			results.add(line + ": " + clsName);
-                       			return results;
-                       		}
-                       	}
-                       	// check equivalent classes
-                       	if(!found) {
-                       		Set<OWLClass> equivalentClasses = dlQueryEngine
-                                       .getEquivalentClasses(classExpression);
-                       		
-                       		for(OWLClass equivalent : equivalentClasses) {
-                       			String equivalentLines[] = getComments(equivalent, ontology);
-                       			for(String line : equivalentLines) {
-                       				if(line.contains(area)) {
-                       					String equivalentName = getClassName(equivalent);
-                       					results.add(line + ": " + equivalentName + ", synonym of " + clsName);
-                       					return results;
-                       				}
-                       			}
-                       		}
-                       		
-                       		//check subclasses next
-                       		if(!found) {
-                       			Set<OWLClass> subClasses = dlQueryEngine
-                                           .getSubClasses(classExpression, false);
-                           		for(OWLClass subClass : subClasses) {
-                           			String subLines[] = getComments(subClass, ontology);
-                           			if(subLines != null) {
-                           				for(String line : subLines) {
-                               				if(line.contains(area)) {
-                               					String subName = getClassName(subClass);
-                               					results.add(line + ": " + subName + ", subclass of " + clsName);
-                                       			found = true;
-                               				}
-                               			}
-                           			}
-                           			
-                           		}
-                           		//we don't return results right away because subclasses is the one area where we
-                           		//can more than one result
-                           		if(found) {
-                           			return results;
-                           		} else {
-                           			//go up the ontology and check superclass last
-                           			Set<OWLClass> superClassesSet = dlQueryEngine.getSuperClasses(classExpression, true);
-                       				ArrayList<OWLClass> superClasses = new ArrayList<OWLClass>(superClassesSet);
-                   					for(int i = 0; i < superClasses.size(); i++) {
-                   						OWLClass superClass = superClasses.get(i);
-                   						//adds the super classes of the super class to ensure we find a class that contains the area
-                   						for(OWLClassExpression superSuperExpression : superClass.getSuperClasses(ontology)) {
-                   							String superSuperClassName = getClassExpression(superSuperExpression.toString().trim());
-                   							OWLClass superSuperClass = dlQueryEngine.getClass(superSuperClassName);
-                   							if(!superClasses.contains(superSuperClass)) {
-                   								superClasses.add(superSuperClass);
-                   							}
-                   						}
-                   						String superLines[] = getComments(superClass, ontology);
-                   						if(superLines != null) {
-                   							for(String line : superLines) {
-                       							if(line.contains(area)) {
-                       								String superName = getClassName(superClass);
-                      								results.add(line + ": " 
-                       										+superName + ", superclass of " + clsName);
-                      								return results;
-                       							}
-                       						}
-                  						}
-                   					}
-                           		}
-                       			
-                       			
-                       			
-                       			
-                       		}
-                       		
-                    
-                       	}
-                    }
-                }
-               
-            } catch (ParserException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        return results;
-    }
+	/**
+	 * @param engine
+	 *        the engine
+	 * @param shortFormProvider
+	 *        the short form provider
+	 */
+	public DLQueryPrinter(DLQueryEngine engine,
+			ShortFormProvider shortFormProvider) {
+		this.shortFormProvider = shortFormProvider;
+		dlQueryEngine = engine;
+	}
 
-    
-    private static String[] getComments(OWLClass cls, OWLOntology ontology) {
-    	String lines[] = null;
-    	for(OWLAnnotation annot : cls.getAnnotations(ontology)) {
-    		String comment = annot.getValue().toString();
-    		//remove quotes
-    		comment = comment.replace("\"", "");
-    		lines = comment.split("\\r?\\n");
-    	}
-    	return lines;
-    }
-    
-    private static String getClassName(OWLClass cls) {
-    	String clsName = cls.toString().replace(EXTRA, "");
-    	clsName = clsName.replace(">", "");
-    	clsName = clsName.replace("_", " ");
-    	return clsName;
-    }
-    
-    private static String getClassExpression(String classExpression) {
-    	String expression = classExpression.replace(EXTRA, "");
-    	expression = expression.replace(">", "");
-    	expression = WordUtils.capitalizeFully(expression,'_',' ','/');
-    	return expression;
-    }
-    
-    
+	private ArrayList<String> getMatchingClasses(Set<OWLClass> classes, String area, OWLOntology ontology, String format){
+		ArrayList<String> results = new ArrayList<String>();
+		for(OWLClass c : classes) {
+			results.addAll(getMatchingClasses(c,area,ontology,format));
+		}
+		return results;
+	}
+
+	private String getMatchingClass(OWLClass cls,
+			String area, OWLOntology ontology, String format) {
+		String cLines[] = getComments(cls, ontology);
+		if(cLines == null){
+			return null;
+		}
+		for(String line : cLines) {
+			if(line.contains(area)) {
+				String cName = getClassName(cls);
+				return String.format(format, line, cName);
+			}
+		}
+		return null;
+	}
+
+	private ArrayList<String> getMatchingClasses(OWLClass cls, String area, OWLOntology ontology, String format){
+		ArrayList<String> result = new ArrayList<String>();
+		String clsString = this.getMatchingClass(cls,area,ontology,format);
+		if(clsString != null){
+			result.add(clsString);
+		}
+		return result;
+	}
+
+	/**
+	 * @param classExpression
+	 *        the class expression to use for interrogation
+	 * @return
+	 * 		returns the query result, "" if no result for given area
+	 */
+	public ArrayList<String> askQuery(String classExpression, OWLOntology ontology, String area) {
+		ArrayList<String> results = new ArrayList<String>();
+		if (classExpression.length() == 0) {
+			return results;
+		} else {
+			try {
+				OWLClass cls = dlQueryEngine.getClass(getClassExpression(classExpression));
+				if(cls != null) {
+					//remove the extra bits from the class name
+					String clsName = getClassName(cls);
+					if(results.addAll(this.getMatchingClasses(cls, area, ontology, "%s: %s"))){
+						return results;
+					}
+					// check equivalent classes
+					Set<OWLClass> equivalentClasses = dlQueryEngine
+							.getEquivalentClasses(classExpression);
+					if(results.addAll(this.getMatchingClasses(equivalentClasses, area, ontology, "%s: %s, synonym of "+clsName))){
+						return results;
+					}
+
+					//check subclasses next
+					Set<OWLClass> subClasses = dlQueryEngine
+							.getSubClasses(classExpression, false);
+					if(results.addAll(this.getMatchingClasses(subClasses, area, ontology, "%s: %s, subclass of "+clsName))){
+						return results;
+					}	
+
+					//we don't return results right away because subclasses is the one area where we
+					//can more than one result
+					//go up the ontology and check superclass last
+					Set<OWLClass> superClassesSet = dlQueryEngine.getSuperClasses(classExpression, true);
+
+					ArrayList<OWLClass> superClasses = new ArrayList<OWLClass>(superClassesSet);
+					for(int i = 0; i < superClasses.size(); i++) {
+						OWLClass superClass = superClasses.get(i);
+						//adds the super classes of the super class to ensure we find a class that contains the area
+						for(OWLClassExpression superSuperExpression : superClass.getSuperClasses(ontology)) {
+							String superSuperClassName = getClassExpression(superSuperExpression.toString().trim());
+							OWLClass superSuperClass = dlQueryEngine.getClass(superSuperClassName);
+							if(!superClasses.contains(superSuperClass)) {
+								superClasses.add(superSuperClass);
+							}
+						}
+						if(results.addAll(this.getMatchingClasses(superClass, area, ontology, "%s: %s, superclass of "+clsName))){
+							return results;
+						}
+
+					}
+
+				}
+
+
+			} catch (ParserException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return results;
+	}
+
+
+
+
+	private static String[] getComments(OWLClass cls, OWLOntology ontology) {
+		String lines[] = null;
+		for(OWLAnnotation annot : cls.getAnnotations(ontology)) {
+			String comment = annot.getValue().toString();
+			//remove quotes
+			comment = comment.replace("\"", "");
+			lines = comment.split("\\r?\\n");
+		}
+		return lines;
+	}
+
+	private static String getClassName(OWLClass cls) {
+		String clsName = cls.toString().replace(EXTRA, "");
+		clsName = clsName.replace(">", "");
+		clsName = clsName.replace("_", " ");
+		return clsName;
+	}
+
+	private static String getClassExpression(String classExpression) {
+		String expression = classExpression.replace(EXTRA, "");
+		expression = expression.replace(">", "");
+		expression = WordUtils.capitalizeFully(expression,'_',' ','/');
+		return expression;
+	}
+
+
 }

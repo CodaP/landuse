@@ -87,5 +87,10 @@ public class DLQueryPrinterTest {
 	public void testNeedToLookSuperclass4(){
 		assertEquals(1, dlQueryPrinter.askQuery("County_Garages", ontology, "Bay Lakes").size());
 	}
+	
+	@Test
+	public void testEquivalent(){
+		assertEquals(1, dlQueryPrinter.askQuery("Dorms", ontology, "ECWRPC").size());
+	}
 
 }
