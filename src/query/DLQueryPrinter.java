@@ -103,7 +103,6 @@ class DLQueryPrinter {
                        	}
                        	// check equivalent classes
                        	if(!found) {
-                       		//System.out.println(area + " not found");
                        		Set<OWLClass> equivalentClasses = dlQueryEngine
                                        .getEquivalentClasses(classExpression);
                        		
@@ -119,14 +118,9 @@ class DLQueryPrinter {
                        		}
                        		
                        		//check subclasses next
-                       		/*
-                       		 * 
-                       		 * Don't return anything here yet. fix this
-                       		 * 
-                       		 */
                        		if(!found) {
                        			Set<OWLClass> subClasses = dlQueryEngine
-                                           .getSubClasses(classExpression, true);
+                                           .getSubClasses(classExpression, false);
                            		for(OWLClass subClass : subClasses) {
                            			String subLines[] = getComments(subClass, ontology);
                            			if(subLines != null) {
@@ -211,7 +205,7 @@ class DLQueryPrinter {
     private static String getClassExpression(String classExpression) {
     	String expression = classExpression.replace(EXTRA, "");
     	expression = expression.replace(">", "");
-    	expression = WordUtils.capitalizeFully(expression,'_',' ');
+    	expression = WordUtils.capitalizeFully(expression,'_',' ','/');
     	return expression;
     }
     

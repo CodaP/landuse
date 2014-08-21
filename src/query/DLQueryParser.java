@@ -95,7 +95,7 @@ class DLQueryParser {
         ManchesterOWLSyntaxEditorParser parser = new ManchesterOWLSyntaxEditorParser(
                 dataFactory, classExpressionString);
         parser.setDefaultOntology(rootOntology);
-        // Specify an entity checker that wil be used to check a class
+        // Specify an entity checker that will be used to check a class
         // expression contains the correct names.
         OWLEntityChecker entityChecker = new ShortFormEntityChecker(
                 bidiShortFormProvider);
