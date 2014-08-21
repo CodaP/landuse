@@ -49,7 +49,6 @@ import org.apache.commons.lang3.text.WordUtils;
 import org.semanticweb.owlapi.expression.ParserException;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.util.ShortFormProvider;
 
@@ -117,7 +116,8 @@ class DLQueryPrinter {
 			return results;
 		} else {
 			try {
-				OWLClass cls = dlQueryEngine.getClass(getClassExpression(classExpression));
+				classExpression = getClassExpression(classExpression);
+				OWLClass cls = dlQueryEngine.getClass(classExpression);
 				if(cls != null) {
 					//remove the extra bits from the class name
 					String clsName = getClassName(cls);
@@ -138,32 +138,22 @@ class DLQueryPrinter {
 						return results;
 					}	
 
-					//we don't return results right away because subclasses is the one area where we
 					//can more than one result
 					//go up the ontology and check superclass last
-					Set<OWLClass> superClassesSet = dlQueryEngine.getSuperClasses(classExpression, true);
-
-					ArrayList<OWLClass> superClasses = new ArrayList<OWLClass>(superClassesSet);
-					for(int i = 0; i < superClasses.size(); i++) {
-						OWLClass superClass = superClasses.get(i);
-						//adds the super classes of the super class to ensure we find a class that contains the area
-						for(OWLClassExpression superSuperExpression : superClass.getSuperClasses(ontology)) {
-							String superSuperClassName = getClassExpression(superSuperExpression.toString().trim());
-							OWLClass superSuperClass = dlQueryEngine.getClass(superSuperClassName);
-							if(!superClasses.contains(superSuperClass)) {
-								superClasses.add(superSuperClass);
-							}
-						}
-						if(results.addAll(this.getMatchingClasses(superClass, area, ontology, "%s: %s, superclass of "+clsName))){
+					for(OWLClass superClass : dlQueryEngine.getSuperClasses(classExpression,false)) {
+						// Loop through all super classes
+						String superString = this.getMatchingClass(superClass, area, ontology, "%s: %s, superclass of "+clsName);
+						if(superString != null){
+							results.add(superString);
 							return results;
 						}
-
 					}
 
 				}
 
 
 			} catch (ParserException e) {
+				// Most probably given an invalid class name
 				System.out.println(e.getMessage());
 			}
 		}
@@ -191,10 +181,11 @@ class DLQueryPrinter {
 		return clsName;
 	}
 
-	private static String getClassExpression(String classExpression) {
+	public static String getClassExpression(String classExpression) {
 		String expression = classExpression.replace(EXTRA, "");
 		expression = expression.replace(">", "");
 		expression = WordUtils.capitalizeFully(expression,'_',' ','/');
+		expression = expression.replace("And", "and");
 		return expression;
 	}
 

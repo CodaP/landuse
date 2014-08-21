@@ -4,7 +4,10 @@
 package query;
 
 import static org.junit.Assert.*;
+
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import org.junit.After;
 import org.junit.Before;
@@ -91,6 +94,16 @@ public class DLQueryPrinterTest {
 	@Test
 	public void testEquivalent(){
 		assertEquals(1, dlQueryPrinter.askQuery("Dorms", ontology, "ECWRPC").size());
+	}
+	
+	@Test
+	public void testNeedToLookSuperclass5(){
+		assertEquals(1, dlQueryPrinter.askQuery("Electric_Generation_Plants", ontology, "Eau Claire").size());
+	}
+	
+	@Test
+	public void testGetClassExpression(){
+			assertEquals("Electric_Generation_Plants",dlQueryPrinter.getClassExpression("electric_generation_plants"));
 	}
 
 }
