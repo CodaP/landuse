@@ -43,6 +43,9 @@ package query;
  */
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 
 import org.apache.commons.lang3.text.WordUtils;
@@ -55,8 +58,8 @@ import org.semanticweb.owlapi.util.ShortFormProvider;
 
 class DLQueryPrinter {
 
-	private final DLQueryEngine dlQueryEngine;
-	private final ShortFormProvider shortFormProvider;
+	final DLQueryEngine dlQueryEngine;
+	final ShortFormProvider shortFormProvider;
 
 	private static final String EXTRA = "<http://www.semanticweb.org/ontologies/2011/9/ResidentialLandCodes.owl#";
 
@@ -72,7 +75,7 @@ class DLQueryPrinter {
 		dlQueryEngine = engine;
 	}
 
-	private ArrayList<String> getMatchingClasses(Set<OWLClass> classes, String area, OWLOntology ontology, String format){
+	private ArrayList<String> getMatchingClasses(Collection<OWLClass> classes, String area, OWLOntology ontology, String format){
 		ArrayList<String> results = new ArrayList<String>();
 		for(OWLClass c : classes) {
 			results.addAll(getMatchingClasses(c,area,ontology,format));
@@ -126,26 +129,30 @@ class DLQueryPrinter {
 					}
 					// check equivalent classes
 					Set<OWLClass> equivalentClasses = dlQueryEngine
-							.getEquivalentClasses(classExpression);
+							.getEquivalentClasses(cls);
 					if(results.addAll(this.getMatchingClasses(equivalentClasses, area, ontology, "%s: %s, synonym of "+clsName))){
 						return results;
 					}
 
 					//check subclasses next
 					Set<OWLClass> subClasses = dlQueryEngine
-							.getSubClasses(classExpression, false);
+							.getSubClasses(cls, false);
 					if(results.addAll(this.getMatchingClasses(subClasses, area, ontology, "%s: %s, subclass of "+clsName))){
 						return results;
-					}	
+					}
 
-					//can more than one result
+					//can be more than one result for superclass if equivalent classes exist
 					//go up the ontology and check superclass last
-					for(OWLClass superClass : dlQueryEngine.getSuperClasses(classExpression,false)) {
-						// Loop through all super classes
-						String superString = this.getMatchingClass(superClass, area, ontology, "%s: %s, superclass of "+clsName);
-						if(superString != null){
-							results.add(superString);
+					Queue<OWLClass> queue = new LinkedList<OWLClass>();
+					queue.add(cls);
+					while(!queue.isEmpty()){
+						OWLClass current = queue.remove();
+						if(results.addAll(this.getMatchingClasses(current,area,ontology,"%s: %s, superclass of "+clsName))){
+							results.addAll(this.getMatchingClasses(dlQueryEngine.getEquivalentClasses(current),area,ontology,"%s: %s, superclass of "+clsName));
 							return results;
+						}
+						for(OWLClass superClass: dlQueryEngine.getSuperClasses(current, true)){
+							queue.add(superClass);
 						}
 					}
 
