@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.semanticweb.owlapi.expression.ParserException;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 /**
@@ -59,7 +60,12 @@ public class DLQueryPrinterTest {
 
 	@Test
 	public void testNoSuchClass(){
-		assertEquals(0,dlQueryPrinter.askQuery("NoClass", ontology, "Eau Claire").size());
+		try{
+			assertEquals(0,dlQueryPrinter.askQuery("NoClass", ontology, "Eau Claire").size());
+			fail("Did not throw ParserException");
+		}
+		catch(ParserException e){
+		}
 	}
 
 	@Test
@@ -124,7 +130,7 @@ public class DLQueryPrinterTest {
 		List<String> results = dlQueryPrinter.askQuery("Single_Unit_In_A_Duplex", ontology, "Madison");
 		assertEquals(2, results.size());
 		String result1 = "Madison [111]: Single Family, superclass of Single Unit In A Duplex";
-		String result2 = "Madison [1110]: One Family Unit, superclass of Single Unit In A Duplex";
+		String result2 = "Madison [1110]: One Family Unit, superclass of Single Unit In A Duplex, equivalent class of Single Family";
 		assertTrue(results.toString()+" does not contain "+result1, results.contains(result1));
 		assertTrue(results.toString()+" does not contain "+result2, results.contains(result2));
 	}

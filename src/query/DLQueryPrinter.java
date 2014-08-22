@@ -147,7 +147,8 @@ class DLQueryPrinter {
 				while(!queue.isEmpty()){
 					OWLClass current = queue.remove();
 					if(results.addAll(this.getMatchingClasses(current,area,ontology,"%s: %s, superclass of "+clsName))){
-						results.addAll(this.getMatchingClasses(dlQueryEngine.getEquivalentClasses(current),area,ontology,"%s: %s, superclass of "+clsName));
+						results.addAll(this.getMatchingClasses(dlQueryEngine.getEquivalentClasses(current),area,ontology,"%s: %s, superclass of "+
+								clsName+", equivalent class of "+getClassName(current)));
 						return results;
 					}
 					for(OWLClass superClass: dlQueryEngine.getSuperClasses(current, true)){
