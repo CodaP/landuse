@@ -44,12 +44,12 @@ package query;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
 import org.apache.commons.lang3.text.WordUtils;
-import org.semanticweb.owlapi.expression.ParserException;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -113,8 +113,8 @@ class DLQueryPrinter {
 	 * @return
 	 * 		returns the query result, "" if no result for given area
 	 */
-	public ArrayList<String> askQuery(String classExpression, OWLOntology ontology, String area) {
-		ArrayList<String> results = new ArrayList<String>();
+	public Set<String> askQuery(String classExpression, OWLOntology ontology, String area) {
+		Set<String> results = new HashSet<String>();
 		if (classExpression.length() == 0) {
 			return results;
 		} else {
@@ -124,12 +124,10 @@ class DLQueryPrinter {
 				//remove the extra bits from the class name
 				String clsName = getClassName(cls);
 				if(results.addAll(this.getMatchingClasses(cls, area, ontology, "%s: %s"))){
-					return results;
-				}
-				// check equivalent classes
-				Set<OWLClass> equivalentClasses = dlQueryEngine
-						.getEquivalentClasses(cls);
-				if(results.addAll(this.getMatchingClasses(equivalentClasses, area, ontology, "%s: %s, synonym of "+clsName))){
+					// check equivalent classes
+					Set<OWLClass> equivalentClasses = dlQueryEngine
+							.getEquivalentClasses(cls);
+					results.addAll(this.getMatchingClasses(equivalentClasses, area, ontology, "%s: %s, synonym of "+clsName));
 					return results;
 				}
 

@@ -1,7 +1,9 @@
 package query;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.expression.ParserException;
@@ -110,7 +112,7 @@ public class QueryManager {
 	
 	public List<String> runQuery(String query) {
 		if(dlQueryPrinter != null) {
-			ArrayList<String> results = new ArrayList<String>();
+			Set<String> results = new HashSet<String>();
 			int i = 0;
 			try{
 				for(boolean toggle : areaToggle) {
@@ -122,11 +124,11 @@ public class QueryManager {
 				if(results.isEmpty()){
 					results.add("No results");
 				}
-				return results;
+				return new ArrayList<String>(results);
 			}
 			catch(ParserException e){
-				results.add("No results. No such class: "+dlQueryPrinter.getClassExpression(query));
-				return results;
+				results.add("No results. No such class: "+DLQueryPrinter.getClassExpression(query));
+				return new ArrayList<String>(results);
 			}
 		} else {
 			return null;

@@ -9,6 +9,7 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
@@ -102,6 +103,11 @@ public class DLQueryPrinterTest {
 	public void testEquivalent(){
 		assertEquals(1, dlQueryPrinter.askQuery("Dorms", ontology, "ECWRPC").size());
 	}
+	
+	@Test
+	public void testEquivalent2(){
+		assertEquals(2, dlQueryPrinter.askQuery("Single_Family", ontology, "Madison").size());
+	}
 
 	@Test
 	public void testNeedToLookSuperclass5(){
@@ -122,12 +128,12 @@ public class DLQueryPrinterTest {
 	public void testEquivalentSuper(){
 		assertEquals(1, dlQueryPrinter.askQuery("College_Dorms", ontology, "ECWRPC").size());
 		assertEquals("ECWRPC [942]: Residence Halls, superclass of College Dorms",
-				dlQueryPrinter.askQuery("College_Dorms", ontology, "ECWRPC").get(0));
+				dlQueryPrinter.askQuery("College_Dorms", ontology, "ECWRPC").iterator().next());
 	}
 
 	@Test
 	public void testEquivalentSuper2(){
-		List<String> results = dlQueryPrinter.askQuery("Single_Unit_In_A_Duplex", ontology, "Madison");
+		Set<String> results = dlQueryPrinter.askQuery("Single_Unit_In_A_Duplex", ontology, "Madison");
 		assertEquals(2, results.size());
 		String result1 = "Madison [111]: Single Family, superclass of Single Unit In A Duplex";
 		String result2 = "Madison [1110]: One Family Unit, superclass of Single Unit In A Duplex, equivalent class of Single Family";
@@ -138,7 +144,7 @@ public class DLQueryPrinterTest {
 	@Test
 	public void testEquivalentSuper3(){
 		assertEquals(1, dlQueryPrinter.askQuery("Single_Unit_In_A_Duplex", ontology, "Bay Lakes").size());
-		assertEquals("Bay Lakes [110]: Single Family, superclass of Single Unit In A Duplex", dlQueryPrinter.askQuery("Single_Unit_In_A_Duplex", ontology, "Bay Lakes").get(0));
+		assertEquals("Bay Lakes [110]: Single Family, superclass of Single Unit In A Duplex", dlQueryPrinter.askQuery("Single_Unit_In_A_Duplex", ontology, "Bay Lakes").iterator().next());
 	}
 
 }
