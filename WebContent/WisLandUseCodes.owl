@@ -898,7 +898,7 @@
         <Class IRI="#Distilling,_Rectifying,_and_Blending_Liquors"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Distrobution_Brokers_that_Sell_Natural_Gas"/>
+        <Class IRI="#Distribution_Brokers_That_Sell_Natural_Gas"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Docking_Terminals"/>
@@ -2017,7 +2017,7 @@
         <Class IRI="#Motion_Picture/Movie_Theaters"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Motion_Picture_Distrobution_and_Services"/>
+        <Class IRI="#Motion_Picture_Distribution_and_Services"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Motion_Picture_Production"/>
@@ -2086,7 +2086,7 @@
         <Class IRI="#Music_Supplies"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Natural/Manufactured_Gas_Storage_and_Distrobution_Points"/>
+        <Class IRI="#Natural/Manufactured_Gas_Storage_and_Distribution_Points"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Natural_Areas"/>
@@ -5056,7 +5056,7 @@
         <Class IRI="#Beverage"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Distrobution_Brokers_that_Sell_Natural_Gas"/>
+        <Class IRI="#Distribution_Brokers_That_Sell_Natural_Gas"/>
         <Class IRI="#Other_(Gas_Utility)"/>
     </SubClassOf>
     <SubClassOf>
@@ -6552,7 +6552,7 @@
         <Class IRI="#Indoor"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Motion_Picture_Distrobution_and_Services"/>
+        <Class IRI="#Motion_Picture_Distribution_and_Services"/>
         <Class IRI="#Other_(Business_Services)"/>
     </SubClassOf>
     <SubClassOf>
@@ -6656,7 +6656,7 @@
         <Class IRI="#Radios,_Television_and_Music_Supplies"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Natural/Manufactured_Gas_Storage_and_Distrobution_Points"/>
+        <Class IRI="#Natural/Manufactured_Gas_Storage_and_Distribution_Points"/>
         <Class IRI="#Natural_Gas_Substations"/>
     </SubClassOf>
     <SubClassOf>
@@ -10562,7 +10562,7 @@ Dane County [53]</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Distrobution_Brokers_that_Sell_Natural_Gas</IRI>
+        <IRI>#Distribution_Brokers_That_Sell_Natural_Gas</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">ECWRPC [2212]</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
@@ -12603,7 +12603,7 @@ Dane County [68]</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Motion_Picture_Distrobution_and_Services</IRI>
+        <IRI>#Motion_Picture_Distribution_and_Services</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Madison [6398]</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
@@ -12734,7 +12734,7 @@ Dane County [71]</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Natural/Manufactured_Gas_Storage_and_Distrobution_Points</IRI>
+        <IRI>#Natural/Manufactured_Gas_Storage_and_Distribution_Points</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Madison [4823]</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
