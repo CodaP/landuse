@@ -118,50 +118,43 @@ class DLQueryPrinter {
 		if (classExpression.length() == 0) {
 			return results;
 		} else {
-			try {
-				classExpression = getClassExpression(classExpression);
-				OWLClass cls = dlQueryEngine.getClass(classExpression);
-				if(cls != null) {
-					//remove the extra bits from the class name
-					String clsName = getClassName(cls);
-					if(results.addAll(this.getMatchingClasses(cls, area, ontology, "%s: %s"))){
-						return results;
-					}
-					// check equivalent classes
-					Set<OWLClass> equivalentClasses = dlQueryEngine
-							.getEquivalentClasses(cls);
-					if(results.addAll(this.getMatchingClasses(equivalentClasses, area, ontology, "%s: %s, synonym of "+clsName))){
-						return results;
-					}
-
-					//check subclasses next
-					Set<OWLClass> subClasses = dlQueryEngine
-							.getSubClasses(cls, false);
-					if(results.addAll(this.getMatchingClasses(subClasses, area, ontology, "%s: %s, subclass of "+clsName))){
-						return results;
-					}
-
-					//can be more than one result for superclass if equivalent classes exist
-					//go up the ontology and check superclass last
-					Queue<OWLClass> queue = new LinkedList<OWLClass>();
-					queue.add(cls);
-					while(!queue.isEmpty()){
-						OWLClass current = queue.remove();
-						if(results.addAll(this.getMatchingClasses(current,area,ontology,"%s: %s, superclass of "+clsName))){
-							results.addAll(this.getMatchingClasses(dlQueryEngine.getEquivalentClasses(current),area,ontology,"%s: %s, superclass of "+clsName));
-							return results;
-						}
-						for(OWLClass superClass: dlQueryEngine.getSuperClasses(current, true)){
-							queue.add(superClass);
-						}
-					}
-
+			classExpression = getClassExpression(classExpression);
+			OWLClass cls = dlQueryEngine.getClass(classExpression);
+			if(cls != null) {
+				//remove the extra bits from the class name
+				String clsName = getClassName(cls);
+				if(results.addAll(this.getMatchingClasses(cls, area, ontology, "%s: %s"))){
+					return results;
+				}
+				// check equivalent classes
+				Set<OWLClass> equivalentClasses = dlQueryEngine
+						.getEquivalentClasses(cls);
+				if(results.addAll(this.getMatchingClasses(equivalentClasses, area, ontology, "%s: %s, synonym of "+clsName))){
+					return results;
 				}
 
+				//check subclasses next
+				Set<OWLClass> subClasses = dlQueryEngine
+						.getSubClasses(cls, false);
+				if(results.addAll(this.getMatchingClasses(subClasses, area, ontology, "%s: %s, subclass of "+clsName))){
+					return results;
+				}
 
-			} catch (ParserException e) {
-				// Most probably given an invalid class name
-				System.out.println(e.getMessage());
+				//can be more than one result for superclass if equivalent classes exist
+				//go up the ontology and check superclass last
+				Queue<OWLClass> queue = new LinkedList<OWLClass>();
+				queue.add(cls);
+				while(!queue.isEmpty()){
+					OWLClass current = queue.remove();
+					if(results.addAll(this.getMatchingClasses(current,area,ontology,"%s: %s, superclass of "+clsName))){
+						results.addAll(this.getMatchingClasses(dlQueryEngine.getEquivalentClasses(current),area,ontology,"%s: %s, superclass of "+clsName));
+						return results;
+					}
+					for(OWLClass superClass: dlQueryEngine.getSuperClasses(current, true)){
+						queue.add(superClass);
+					}
+				}
+
 			}
 		}
 		return results;

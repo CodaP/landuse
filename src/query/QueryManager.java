@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.expression.ParserException;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -111,13 +112,22 @@ public class QueryManager {
 		if(dlQueryPrinter != null) {
 			ArrayList<String> results = new ArrayList<String>();
 			int i = 0;
-			for(boolean toggle : areaToggle) {
-				if(toggle) {
-					results.addAll(dlQueryPrinter.askQuery(query, ontology, AREAS[i]));
+			try{
+				for(boolean toggle : areaToggle) {
+					if(toggle) {
+						results.addAll(dlQueryPrinter.askQuery(query, ontology, AREAS[i]));
+					}
+					i++;
 				}
-				i++;
+				if(results.isEmpty()){
+					results.add("No results");
+				}
+				return results;
 			}
-			return results;
+			catch(ParserException e){
+				results.add("No results. No such class: "+dlQueryPrinter.getClassExpression(query));
+				return results;
+			}
 		} else {
 			return null;
 		}
