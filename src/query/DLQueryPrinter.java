@@ -130,6 +130,13 @@ class DLQueryPrinter {
 					results.addAll(this.getMatchingClasses(equivalentClasses, area, ontology, "%s: %s, synonym of "+clsName));
 					return results;
 				}
+				
+				// Check for synonyms
+				Set<OWLClass> equivalentClasses = dlQueryEngine
+						.getEquivalentClasses(cls);
+				if(results.addAll(this.getMatchingClasses(equivalentClasses,area,ontology,"%s: %s, synonym of "+clsName))){
+					return results;
+				}
 
 				//check subclasses next
 				Set<OWLClass> subClasses = dlQueryEngine

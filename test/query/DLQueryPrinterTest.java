@@ -48,15 +48,20 @@ public class DLQueryPrinterTest {
 	@Test
 	public void testFoundItRightAway() {
 		assertEquals(1,dlQueryPrinter.askQuery("Vacant_Lot", ontology, "Bay Lakes").size());
+		assertEquals("Bay Lakes [195]: Vacant Lot",
+				dlQueryPrinter.askQuery("Vacant_Lot", ontology, "Bay Lakes").iterator().next());
 		assertEquals(1,dlQueryPrinter.askQuery("Residential", ontology, "Madison").size());
+		assertEquals("Madison [1]: Residential",
+				dlQueryPrinter.askQuery("Residential", ontology, "Madison").iterator().next());
 		assertEquals(1,dlQueryPrinter.askQuery("Residential", ontology, "NCWRPC").size());
+		assertEquals("NCWRPC [5]: Residential",
+				dlQueryPrinter.askQuery("Residential", ontology, "NCWRPC").iterator().next());
 	}
 
 	@Test
 	public void testNeedToLookSubclass(){
 		assertEquals(1,dlQueryPrinter.askQuery("Vacant", ontology, "Eau Claire").size());
-
-		//assertEquals(4,dlQueryPrinter.askQuery("Residential", ontology, "SEWRPC").size());
+		assertEquals("Eau Claire [RV]: Vacant Residence, subclass of Vacant",dlQueryPrinter.askQuery("Vacant", ontology, "Eau Claire").iterator().next());
 	}
 
 	@Test
@@ -72,46 +77,77 @@ public class DLQueryPrinterTest {
 	@Test
 	public void testNeedToLookSuperclass1(){
 		assertEquals(1,dlQueryPrinter.askQuery("Vacant_Lot", ontology, "ECWRPC").size());
+		assertEquals("ECWRPC [94]: Vacant, superclass of Vacant Lot",
+				dlQueryPrinter.askQuery("Vacant_Lot", ontology, "ECWRPC").iterator().next());
+
 	}
 
 	@Test
 	public void testNeedToLookSuperclass2(){
 		assertEquals(1,dlQueryPrinter.askQuery("Vacant_Lot", ontology, "NCWRPC").size());
+		assertEquals("NCWRPC [5]: Residential, superclass of Vacant Lot",
+				dlQueryPrinter.askQuery("Vacant_Lot", ontology, "NCWRPC").iterator().next());
 	}
 
 	@Test
 	public void testNeedToLookSuperclass3(){
 		assertEquals(1,dlQueryPrinter.askQuery("County_Garages", ontology, "NCWRPC").size());
+		assertEquals("NCWRPC [9]: Transportation, superclass of County Garages",
+				dlQueryPrinter.askQuery("County_Garages", ontology, "NCWRPC").iterator().next());
 	}
 
 	@Test
 	public void testLowerClassName(){
 		assertEquals(1,dlQueryPrinter.askQuery("vacant_lot", ontology, "Bay Lakes").size());
+		assertEquals("Bay Lakes [195]: Vacant Lot",
+				dlQueryPrinter.askQuery("Vacant_Lot", ontology, "Bay Lakes").iterator().next());
 	}
 
 	@Test
 	public void testDeepLookSubclass(){
-		assertTrue(1 < dlQueryPrinter.askQuery("Natural_Areas", ontology, "SEWRPC").size());
+		Set<String> results = dlQueryPrinter.askQuery("Natural_Areas", ontology, "SEWRPC");
+		String str1 = "SEWRPC [940]: Woodlands, subclass of Natural Areas";
+		String str2 = "SEWRPC [910]: Wetlands, subclass of Natural Areas";
+		String str3 = "SEWRPC [950]: Surface Water, subclass of Natural Areas";
+		String str4 = "SEWRPC [922]: Unused Land-Rural, subclass of Natural Areas";
+		String str5 = "SEWRPC [921]: Unused Land-Urban, subclass of Natural Areas";
+		assertEquals(5, dlQueryPrinter.askQuery("Natural_Areas", ontology, "SEWRPC").size());
+		assertTrue(results.contains(str1));
+		assertTrue(results.contains(str2));
+		assertTrue(results.contains(str3));
+		assertTrue(results.contains(str4));
+		assertTrue(results.contains(str5));
+
 	}
 
 	@Test
 	public void testNeedToLookSuperclass4(){
 		assertEquals(1, dlQueryPrinter.askQuery("County_Garages", ontology, "Bay Lakes").size());
+		assertEquals("Bay Lakes [410]: Motor Vehicle Related, superclass of County Garages",
+				dlQueryPrinter.askQuery("County_Garages", ontology, "Bay Lakes").iterator().next());
 	}
 
 	@Test
 	public void testEquivalent(){
 		assertEquals(1, dlQueryPrinter.askQuery("Dorms", ontology, "ECWRPC").size());
+		assertEquals("ECWRPC [942]: Residence Halls, synonym of Dorms",
+				dlQueryPrinter.askQuery("Dorms", ontology, "ECWRPC").iterator().next());
 	}
 	
 	@Test
 	public void testEquivalent2(){
+		String str1 = "Madison [111]: Single Family";
+		String str2 = "Madison [1110]: One Family Unit, synonym of Single Family";
 		assertEquals(2, dlQueryPrinter.askQuery("Single_Family", ontology, "Madison").size());
+		assertTrue(dlQueryPrinter.askQuery("Single_Family", ontology, "Madison").contains(str1));
+		assertTrue(dlQueryPrinter.askQuery("Single_Family", ontology, "Madison").contains(str2));
 	}
 
 	@Test
 	public void testNeedToLookSuperclass5(){
 		assertEquals(1, dlQueryPrinter.askQuery("Electric_Generation_Plants", ontology, "Eau Claire").size());
+		assertEquals("Eau Claire [PU]: Utilities/Communication, superclass of Electric Generation Plants",
+				dlQueryPrinter.askQuery("Electric_Generation_Plants", ontology, "Eau Claire").iterator().next());
 	}
 
 	@Test
