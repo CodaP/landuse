@@ -75,6 +75,15 @@ class DLQueryPrinter {
 		dlQueryEngine = engine;
 	}
 
+	/**
+	 * Return strings for classes matching the area
+	 * 
+	 * @param classes, Collection of classes to search for codes in.
+	 * @param area, area to match
+	 * @param ontology
+	 * @param format, format string including two string placeholders for land code and class name
+	 * @return ArrayList of strings representing matching classes
+	 */
 	private ArrayList<String> getMatchingClasses(Collection<OWLClass> classes, String area, OWLOntology ontology, String format){
 		ArrayList<String> results = new ArrayList<String>();
 		for(OWLClass c : classes) {
@@ -83,6 +92,15 @@ class DLQueryPrinter {
 		return results;
 	}
 
+	/**
+	 * Return string representing the land use code for an area if one exists for the class.
+	 * 
+	 * @param cls, class to search for codes in
+	 * @param area, area to match
+	 * @param ontology
+	 * @param format, format string including two string placeholders for land code and class name
+	 * @return Matching string or null if not found
+	 */
 	private String getMatchingClass(OWLClass cls,
 			String area, OWLOntology ontology, String format) {
 		String cLines[] = getComments(cls, ontology);
@@ -98,6 +116,15 @@ class DLQueryPrinter {
 		return null;
 	}
 
+	/**
+	 * Overloaded convenience method for matching strings on a single class instead of a Collection
+	 * 
+	 * @param cls, class to search for codes in
+	 * @param area, area to match
+	 * @param ontology
+	 * @param format, format string including two string placeholders for land code and class name
+	 * @return ArrayList of strings representing matching classes, size is 0 or 1
+	 */
 	private ArrayList<String> getMatchingClasses(OWLClass cls, String area, OWLOntology ontology, String format){
 		ArrayList<String> result = new ArrayList<String>();
 		String clsString = this.getMatchingClass(cls,area,ontology,format);
