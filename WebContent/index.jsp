@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- InstanceBeginEditable name="doctitle" -->
-<title>Landuse Demo</title>
+<title>Land Use Demo</title>
 <!-- InstanceEndEditable -->
 <!-- SSEC PROJECT TEMPLATE FORMATTING AND JS: BEGIN -->
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -72,7 +72,7 @@
 	<div id="banner">
 		<div id="banner_inner" class="central_column">
 			<div id="title">
-				<h1>Landuse Demo<a href="/"></a></h1>
+				<h1>Land Use Demo</h1>
 				<div class="logos">
 					<a href="http://www.wisc.edu/"><img src="img/uw-logo.png" id="uw_logo" alt="UW-Madison"></a> 
 					<a href="http://www.ssec.wisc.edu/"><img src="img/ssec-logo.png" id="sseclogo" alt="SSEC"></a> 
@@ -85,8 +85,7 @@
 	<div id="top_nav" class="navbar">
 		<div class="navbar_inner central_column">
 			<ul class="inner_padding">
-				<li><a href="/hyris/">Home</a></li>
-<li><a href="/hyris/products/">Products</a></li>
+				<li><a href="http://www.ssec.wisc.edu">Home</a></li>
  
 			</ul>
 		</div>
@@ -112,7 +111,7 @@
 					
 					<div class = 'right_container'>
 						<form method = POST action="index.jsp">
-							<h2>Residential Code</h2>
+							<h2>Land Use Code</h2>
 							<%
 								String query = queryData.getQuery();
 								if(query == null) {
