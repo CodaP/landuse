@@ -1,6 +1,7 @@
 package query;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -124,7 +125,9 @@ public class QueryManager {
 				if(results.isEmpty()){
 					results.add("No results");
 				}
-				return new ArrayList<String>(results);
+				ArrayList<String> results_list = new ArrayList<String>(results);
+				Collections.sort(results_list);
+				return results_list;
 			}
 			catch(ParserException e){
 				results.add("No results. No such class: "+DLQueryPrinter.getClassExpression(query));
