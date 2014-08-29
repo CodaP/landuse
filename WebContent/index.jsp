@@ -208,9 +208,9 @@
 								s = s.replaceAll("Madison", "Madison(city)");
 								//even i, put class even on td tag
 								if(i % 2 == 0) {
-									%><tr><td class = 'even'><%= s %></td></tr><%
+									%><tr><td class = 'even'><a><%= s %></a></td></tr><%
 								} else {
-									%><tr><td><%= s %></td></tr><%
+									%><tr><td><a><%= s %></a></td></tr><%
 								}
 				            	i++;
 				            }
@@ -232,10 +232,15 @@
 					
 				%>
 				<!-- InstanceEndEditable -->
+				<div style="padding-top:50px">
+				<h2>Integrated Land Use Ontology</h2>
+				<h3>Double click a code to select it for the query above</h3>
+				<div id="jstree_demo_div"></div>
+				</div>
 			</div>
 		</div>
 		<br style="clear: both;">
-		<div id="jstree_demo_div"></div>
+
 <script>
 function Node(name){
 	this.id = name;
