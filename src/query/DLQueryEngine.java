@@ -208,7 +208,7 @@ class DLQueryEngine {
 			for(OWLDeclarationAxiom dax : rootOntology.getAxioms(AxiomType.DECLARATION)){
 				OWLClass cls = dax.getEntity().asOWLClass();
 				String shortForm = this.shortFormProvider.getShortForm(cls);
-				if(shortForm.contains(classExpressionString)){
+				if(shortForm.toLowerCase().contains(classExpressionString.toLowerCase())){
 					System.out.println("Found similar class "+shortForm);
 					return cls;
 				}

@@ -151,13 +151,10 @@ public class DLQueryPrinterTest {
 	}
 
 	@Test
-	public void testGetClassExpression(){
-		assertEquals("Electric_Generation_Plants",dlQueryPrinter.getClassExpression("electric_generation_plants"));
-	}
-
-	@Test
 	public void testApproximateClass(){
-		assertEquals("Electric_Generation_Plants",dlQueryPrinter.getClassExpression("electric_generation_plants"));
+		assertEquals(1,dlQueryPrinter.askQuery("electric_generation_plants", ontology, "Madison").size());
+		assertEquals("Madison [4812]: Electric Generation Plants",
+				dlQueryPrinter.askQuery("electric_generation_plants", ontology, "Madison").iterator().next());
 	}
 
 	@Test
@@ -181,6 +178,21 @@ public class DLQueryPrinterTest {
 	public void testEquivalentSuper3(){
 		assertEquals(1, dlQueryPrinter.askQuery("Single_Unit_In_A_Duplex", ontology, "Bay Lakes").size());
 		assertEquals("Bay Lakes [110]: Single Family, superclass of Single Unit In A Duplex", dlQueryPrinter.askQuery("Single_Unit_In_A_Duplex", ontology, "Bay Lakes").iterator().next());
+	}
+	
+	@Test
+	public void testSlash(){
+		assertEquals(1, dlQueryPrinter.askQuery("Piers/Docks", ontology, "Bay Lakes").size());
+		assertEquals("Bay Lakes [484]: Piers/Docks", dlQueryPrinter.askQuery("Piers/Docks", ontology, "Bay Lakes").iterator().next());
+	}
+	
+	@Test
+	public void testDash(){
+		String class_ = "Parcels_in_Agriculture_Areas_Where_Other_Non-Agricultural_Uses_Have_Been_Vacated";
+		assertEquals(1,dlQueryPrinter.askQuery(class_, ontology, "Eau Claire").size());
+		assertEquals("Eau Claire [AV]: Parcels in Agriculture Areas Where Other Non-Agricultural Uses Have Been Vacated",
+				dlQueryPrinter.askQuery(class_, ontology, "Eau Claire").iterator().next());
+		
 	}
 
 }

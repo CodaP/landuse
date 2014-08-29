@@ -49,7 +49,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
-import org.apache.commons.lang3.text.WordUtils;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -217,8 +216,6 @@ class DLQueryPrinter {
 	public static String getClassExpression(String classExpression) {
 		String expression = classExpression.replace(EXTRA, "");
 		expression = expression.replace(">", "");
-		expression = WordUtils.capitalizeFully(expression,'_',' ','/');
-		expression = expression.replace("And", "and");
 		return expression;
 	}
 
