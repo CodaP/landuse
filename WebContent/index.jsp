@@ -27,6 +27,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <link rel="stylesheet" href="js/dist/themes/default/style.min.css"/>
 <script src="js/dist/jstree.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
 <script>
      	$(document).ready(function() {
        		$("#all").change(function() {
@@ -62,6 +63,7 @@
        	});
 </script>
         
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="css/hyris.css">
 <link rel="stylesheet" type="text/css" href="css/normalize.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -290,6 +292,21 @@ function makeTree(){
 	})
 }
 
+function initAutoComplete(){
+	$.ajax('WisLandUseCodes.owl',{dataType:'xml'}).then(function(d){
+		var declarations = d.getElementsByTagName('Declaration');
+		var data = new Array(declarations.length);
+		for(var i=0;i<declarations.length;i++){
+			var name = declarations[i].children[0].attributes['IRI'].value.slice(1);
+			data[i] = name;
+		}
+		$('.input_text').autocomplete({
+			source:data,
+			minLength:3
+		});
+	})
+}
+
 function linkResults(){
 	$('#jstree_demo_div').on('ready.jstree',function(){
 		var jstree = $('#jstree_demo_div').jstree();
@@ -301,10 +318,8 @@ function linkResults(){
 					var id = pat.exec($(this).text())[1].replace(/\s/g,"_");
 					var node = jstree.get_node({'id':id});
 					var text = $(this).text();
-					console.log(text);
 					jstree.deselect_all();
 					jstree.close_all();
-					console.log('clicked '+text);
 					jstree.select_node(node);
 				});
 				$(results[i]).hover(function(){
@@ -324,6 +339,7 @@ $(document).ready(function(){
 		$('.input_text').val($(evt.target).text());
 	});
 	linkResults(jstree);
+	initAutoComplete();
 });
 
 </script>
