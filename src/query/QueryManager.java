@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.expression.ParserException;
+import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -75,7 +76,22 @@ public class QueryManager {
 		        // provider. In this case, we'll just use a simple short form
 		        // provider that generates short froms from IRI
 		        // fragments.
-		        ShortFormProvider shortFormProvider = new SimpleShortFormProvider();
+		        class MyShortFormProvider extends SimpleShortFormProvider{
+		        	
+		        	@Override
+		        	public String getShortForm(OWLEntity entity){
+						if(entity.getIRI().toString() != null){
+							String iri = entity.getIRI().toString();
+							String[] halves = iri.split("#");
+							if(halves.length == 2){
+								return halves[1];
+							}
+						}
+						return super.getShortForm(entity);
+		        	}
+		        }
+		        	
+		        ShortFormProvider shortFormProvider = new MyShortFormProvider();
 
 		        // Create the DLQueryPrinter helper class. This will manage the
 		        // parsing of input and printing of results

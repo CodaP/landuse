@@ -171,8 +171,8 @@ public class DLQueryPrinterTest {
 	public void testEquivalentSuper2(){
 		Set<String> results = dlQueryPrinter.askQuery("Single_Unit_In_A_Duplex", ontology, "Madison");
 		assertEquals(2, results.size());
-		String result1 = "Madison [111]: Single Family, superclass of Single Unit In A Duplex";
-		String result2 = "Madison [1110]: One Family Unit, superclass of Single Unit In A Duplex, equivalent class of Single Family";
+		String result1 = "Madison [111]: Single Family, superclass of Single Unit In A Duplex, equivalent class of One Family Unit";
+		String result2 = "Madison [1110]: One Family Unit, superclass of Single Unit In A Duplex";
 		assertTrue(results.toString()+" does not contain "+result1, results.contains(result1));
 		assertTrue(results.toString()+" does not contain "+result2, results.contains(result2));
 	}

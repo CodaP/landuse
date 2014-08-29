@@ -39,7 +39,7 @@ package query;
 
 import java.util.Collections;
 import java.util.Set;
-import org.semanticweb.owlapi.expression.ParserException;
+import org.semanticweb.owlapi.io.OWLParserException;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
@@ -204,7 +204,7 @@ class DLQueryEngine {
 				return null;
 			}
 		}
-		catch(ParserException e){
+		catch(OWLParserException e){
 			for(OWLDeclarationAxiom dax : rootOntology.getAxioms(AxiomType.DECLARATION)){
 				OWLClass cls = dax.getEntity().asOWLClass();
 				String shortForm = this.shortFormProvider.getShortForm(cls);
