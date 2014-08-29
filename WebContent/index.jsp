@@ -337,6 +337,7 @@ $(document).ready(function(){
 	var jstree = makeTree();
 	$('#jstree_demo_div').dblclick(function(evt){
 		$('.input_text').val($(evt.target).text());
+		$('html, body').animate({ scrollTop: 0 }, 0);
 	});
 	linkResults(jstree);
 	initAutoComplete();
