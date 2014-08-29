@@ -210,9 +210,9 @@
 								s = s.replaceAll("Madison", "Madison(city)");
 								//even i, put class even on td tag
 								if(i % 2 == 0) {
-									%><tr><td class = 'even'><a><%= s %></a></td></tr><%
+									%><tr><td class = 'even'><a href="#jstree_demo_div"><%= s %></a></td></tr><%
 								} else {
-									%><tr><td><a><%= s %></a></td></tr><%
+									%><tr><td><a href="#jstree_demo_div"><%= s %></a></td></tr><%
 								}
 				            	i++;
 				            }
