@@ -11917,7 +11917,7 @@ ECWRPC [50]</Literal>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>#Intensive</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">SEWRPC, 210</Literal>
+        <Literal datatypeIRI="&rdf;PlainLiteral">SEWRPC [210]</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
