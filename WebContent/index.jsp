@@ -291,11 +291,12 @@ function linkResults(){
 		var pat = /.*: (.*?)[, ]*(subclass|synonym|superclass|$).*/;
 		var results = $('#result_table td');
 		for(var i=0;i<results.length;i++){
-			if(pat.test(results[i].innerText)){
+			if(pat.test($(results[i]).text())){
 				$(results[i]).click(function(){
-					var id = pat.exec(this.innerText)[1].replace(/\s/g,"_");
+					var id = pat.exec($(this).text())[1].replace(/\s/g,"_");
 					var node = jstree.get_node({'id':id});
-					var text = this.innerText;
+					var text = $(this).text();
+					console.log(text);
 					jstree.deselect_all();
 					jstree.close_all();
 					console.log('clicked '+text);
@@ -315,7 +316,7 @@ function linkResults(){
 $(document).ready(function(){
 	var jstree = makeTree();
 	$('#jstree_demo_div').dblclick(function(evt){
-		$('.input_text').val(evt.target.innerText);
+		$('.input_text').val($(evt.target).text());
 	});
 	linkResults(jstree);
 });
