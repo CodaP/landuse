@@ -281,14 +281,43 @@ function getNodes(data){
 function makeTree(){
 	$.ajax('WisLandUseCodes.owl',{dataType:'xml'}).then(function(d){
 		var nodes = getNodes(d);
-		$('#jstree_demo_div').jstree({'core':{'data':nodes}});
+		return $('#jstree_demo_div').jstree({'core':{'data':nodes}});
 	})
 }
+
+function linkResults(){
+	$('#jstree_demo_div').on('ready.jstree',function(){
+		var jstree = $('#jstree_demo_div').jstree();
+		var pat = /.*: (.*?)[, ]*(subclass|synonym|superclass|$).*/;
+		var results = $('#result_table td');
+		for(var i=0;i<results.length;i++){
+			if(pat.test(results[i].innerText)){
+				$(results[i]).click(function(){
+					var id = pat.exec(this.innerText)[1].replace(/\s/g,"_");
+					var node = jstree.get_node({'id':id});
+					var text = this.innerText;
+					jstree.deselect_all();
+					jstree.close_all();
+					console.log('clicked '+text);
+					jstree.select_node(node);
+				});
+				$(results[i]).hover(function(){
+					$(this).css('cursor','pointer');
+				},
+				function(){
+					$(this).css('cursor','auto');
+				});
+			}
+		}
+	});
+}
+
 $(document).ready(function(){
-	makeTree();
+	var jstree = makeTree();
 	$('#jstree_demo_div').dblclick(function(evt){
 		$('.input_text').val(evt.target.innerText);
 	});
+	linkResults(jstree);
 });
 
 </script>
