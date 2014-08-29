@@ -25,6 +25,8 @@
 <!-- SSEC PROJECT TEMPLATE FORMATTING AND JS: END -->
 <script src="js/vendor/modernizr-2.7.1.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link rel="stylesheet" href="js/dist/themes/default/style.min.css"/>
+<script src="js/dist/jstree.js"></script>
 <script>
      	$(document).ready(function() {
        		$("#all").change(function() {
@@ -233,6 +235,63 @@
 			</div>
 		</div>
 		<br style="clear: both;">
+		<div id="jstree_demo_div"></div>
+<script>
+function Node(name){
+	this.id = name;
+	this.text = name;
+	this.parent = "#";
+}
+
+function getObs(declarations){
+	var obs = {};
+	for(var i=0; i< declarations.length;i++){
+		var name = declarations[i].children[0].attributes['IRI'].value.slice(1);
+		obs[name] = new Node(name);
+	}
+	return obs;
+}
+
+function populateParents(subclassof,obs){
+	for(var i=0;i<subclassof.length;i++){
+		var parent = subclassof[i].children[1];
+		var child = subclassof[i].children[0];
+		obs[child.attributes['IRI'].value.slice(1)].parent = parent.attributes['IRI'].value.slice(1);
+	}
+}
+
+function getItems(obs){
+	var items = [];
+	for(var i in obs){
+		if(obs.hasOwnProperty(i)){
+			items.push(obs[i]);
+		}
+	}
+	return items;
+}
+
+function getNodes(data){
+	var declarations = data.getElementsByTagName('Declaration');
+	var subclassof = data.getElementsByTagName('SubClassOf');
+	var obs = getObs(declarations);
+	populateParents(subclassof,obs);
+	return getItems(obs);
+}
+
+function makeTree(){
+	$.ajax('WisLandUseCodes.owl',{dataType:'xml'}).then(function(d){
+		var nodes = getNodes(d);
+		$('#jstree_demo_div').jstree({'core':{'data':nodes}});
+	})
+}
+$(document).ready(function(){
+	makeTree();
+	$('#jstree_demo_div').dblclick(function(evt){
+		$('.input_text').val(evt.target.innerText);
+	});
+});
+
+</script>
 	</div>
 	<!--#content-->
 	
