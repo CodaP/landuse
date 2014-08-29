@@ -412,7 +412,7 @@
         <Class IRI="#Brick_and_Structural_Clay_Tile"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Broad_and_Narrow_Woven_Fabrics_and_Other_Smallwares-Cotton//Manmade_Fibers/Silk/Wool"/>
+        <Class IRI="#Broad_and_Narrow_Woven_Fabrics_and_Other_Smallwares-Cotton/Manmade_Fibers/Silk/Wool"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Building,_Materials_Hardware,_Farm_Equipment"/>
@@ -2833,7 +2833,7 @@
         <Class IRI="#Public_Administration"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Public_Assembly_for_Miscellaneous_Purposes"/>
@@ -4149,7 +4149,7 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Assembly_Halls"/>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Associated_Operations"/>
@@ -4408,7 +4408,7 @@
         <Class IRI="#Structural_Clay_Products"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Broad_and_Narrow_Woven_Fabrics_and_Other_Smallwares-Cotton//Manmade_Fibers/Silk/Wool"/>
+        <Class IRI="#Broad_and_Narrow_Woven_Fabrics_and_Other_Smallwares-Cotton/Manmade_Fibers/Silk/Wool"/>
         <Class IRI="#Textile_and_Mill"/>
     </SubClassOf>
     <SubClassOf>
@@ -5297,7 +5297,7 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Entertainment_Assembly"/>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Envelopes"/>
@@ -5533,7 +5533,7 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Fraternal_Organizations/Clubhouses"/>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Fraternity/Sorority_Houses"/>
@@ -5781,7 +5781,7 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Group/Organized_Camps"/>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Group_Homes_For_Adults"/>
@@ -5801,7 +5801,7 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Gymnasiums"/>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Gymnasiums/Health_and_Athletic_Clubs"/>
@@ -6245,7 +6245,7 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Local_Public_Assembly"/>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Local_Streets_and_Roads"/>
@@ -6817,7 +6817,7 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Organizations"/>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Orphanages"/>
@@ -7185,7 +7185,7 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Other_Public_Assembly"/>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Other_Publicly-Owned_Natural_Areas"/>
@@ -7641,19 +7641,19 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Public-Owned_Housing_(Public_Assembly)"/>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Public_Administration"/>
         <Class IRI="#Administrative_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
         <Class IRI="#Institutional/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Public_Assembly_for_Miscellaneous_Purposes"/>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Public_Building_and_Related_Furniture"/>
@@ -7941,7 +7941,7 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Regional_Public_Assembly"/>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Religious_Organizations"/>
@@ -7957,7 +7957,7 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Religious_and_Related_Facilities"/>
-        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities"/>
+        <Class IRI="#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Repair/Maintenance_Services"/>
@@ -9693,7 +9693,7 @@ ECWRPC [50]</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Broad_and_Narrow_Woven_Fabrics_and_Other_Smallwares-Cotton//Manmade_Fibers/Silk/Wool</IRI>
+        <IRI>#Broad_and_Narrow_Woven_Fabrics_and_Other_Smallwares-Cotton/Manmade_Fibers/Silk/Wool</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Madison [221] [2210]
 Dane County [22]</Literal>
     </AnnotationAssertion>
@@ -14048,7 +14048,7 @@ Dane County [65]</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_FAcilities</IRI>
+        <IRI>#Public_Assembly/Public_and_Quasi-Public_Institutions/Governmental_Facilities</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Bay Lakes [680]
 Dane County [75]
 Madison [72]
